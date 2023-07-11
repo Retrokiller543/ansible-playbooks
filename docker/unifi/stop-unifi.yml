@@ -4,3 +4,5 @@
     - name: Stop Docker container
       ansible.builtin.command:
         cmd: sudo docker stop unifi-controller
+      async: 60
+      poll: 10

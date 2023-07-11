@@ -4,3 +4,5 @@
     - name: Start Docker container
       ansible.builtin.command:
         cmd: sudo docker run -d --name=unifi-controller --net=host -e TZ='Europe/Stockholm' -v /UniFi/data:/unifi -v /UniFi/log:/var/log/unifi ryansch/unifi-rpi:latest
+      async: 60
+      poll: 10
