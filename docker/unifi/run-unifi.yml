@@ -1,11 +1,19 @@
 ---
 - hosts: sbc
-  vars:
-        ansible_become_password: "{{ sudo_pass }}"
+  become: yes
   tasks:
-    - name: Start Docker container
-      ansible.builtin.command: 
-        cmd: sudo docker run -d --name=unifi-controller --net=host -e TZ='Europe/Stockholm' -v /UniFi/data:/unifi -v /UniFi/log:/var/log/unifi ryansch/unifi-rpi:latest
+    - name: Run UniFi Controller Docker container
+      community.docker.docker_container:
+        name: unifi-controller
+        image: ryansch/unifi-rpi:latest
+        state: started
+        detach: yes
+        network_mode: host
+        env:
+          TZ: 'Europe/Stockholm'
+        volumes:
+          - /UniFi/data:/unifi
+          - /UniFi/log:/var/log/unifi
       async: 60
       poll: 10
 

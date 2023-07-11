@@ -1,12 +1,10 @@
 ---
 - hosts: sbc
-  vars:
-      ansible_become_password: "{{ sudo_pass }}"
+  become: yes
   tasks:
-    - name: Stop Docker container
-      expect:
-        command: sudo docker stop unifi-controller
-        responses:
-          Password: "{{ sudo_pass }}"
+    - name: Stop UniFi Controller Docker container
+      community.docker.docker_container:
+        name: unifi-controller
+        state: stopped
       async: 60
       poll: 10
