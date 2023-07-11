@@ -3,4 +3,4 @@
   tasks:
     - name: Stop Docker container
       ansible.builtin.command:
-        cmd: docker stop unifi-controller
+        cmd: sudo docker stop unifi-controller
