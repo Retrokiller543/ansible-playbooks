@@ -23,4 +23,5 @@
       body_format: json
       body:
         content: "Docker has been successfully installed and started."
+      ignore_errors: true
 ...
