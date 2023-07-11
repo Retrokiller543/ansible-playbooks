@@ -1,0 +1,26 @@
+---
+- hosts: all
+  tasks:
+  - name: Ensure Docker is installed
+    become: yes
+    ansible.builtin.package:
+      name: docker
+      state: present
+
+  - name: Ensure Docker service is running
+    become: yes
+    ansible.builtin.service:
+      name: docker
+      state: started
+
+  - name: Send message to Discord
+    delegate_to: localhost
+    uri:
+      url: https://discord.com/api/webhooks/1128344605545484288/o8j_hwW_QH8eIpjniBae8rkTpxP5tOP7xS_2JBWi514N9Q7hqaS7AKs1VEb349TPPoNG
+      method: POST
+      headers:
+        Content-Type: "application/json"
+      body_format: json
+      body:
+        content: "Docker has been successfully installed and started."
+...
