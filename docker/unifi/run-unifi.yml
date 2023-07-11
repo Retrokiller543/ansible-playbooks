@@ -14,6 +14,5 @@
         volumes:
           - /UniFi/data:/unifi
           - /UniFi/log:/var/log/unifi
-      async: 60
-      poll: 10
+      
 
