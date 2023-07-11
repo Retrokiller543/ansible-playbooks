@@ -5,7 +5,7 @@
     become: yes
     ansible.builtin.user:
       name: admin
-      password: "{{ lookup('env', 'your_semaphore_environment_variable') | password_hash('sha512') }}"
+      password: "{{ lookup('env', 'password') | password_hash('sha512') }}"
       state: present
   - name: Add the user to sudoers
     become: yes
