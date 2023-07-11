@@ -1,14 +1,13 @@
 ---
 - hosts: all
+  become: yes
   tasks:
   - name: Create a new admin user
-    become: yes
     ansible.builtin.user:
       name: "{{ lookup('env', 'username')}}"
       password: "{{ lookup('env', 'password') | password_hash('sha512') }}"
       state: present
   - name: Add the user to sudoers
-    become: yes
     lineinfile:
       path: /etc/sudoers
       line: 'admin ALL=(ALL) NOPASSWD:ALL'
