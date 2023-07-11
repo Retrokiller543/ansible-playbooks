@@ -1,6 +1,8 @@
 ---
 - hosts: sbc
   become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: Stop UniFi Controller Docker container
       community.docker.docker_container:
