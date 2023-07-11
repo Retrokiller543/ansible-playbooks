@@ -1,8 +1,6 @@
 ---
 - hosts: sbc
-  become: yes
   tasks:
-    - name: Stop UniFi Controller Docker container
-      community.docker.docker_container:
-        name: unifi-controller
-        state: stopped
+    - name: Stop Docker container
+      ansible.builtin.command:
+        cmd: docker stop unifi-controller
