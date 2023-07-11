@@ -4,8 +4,6 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:
-    - name: Stop UniFi Controller Docker container
-      community.docker.docker_container:
-        name: unifi-controller
-        state: stopped
-      
+    - name: Stop and remove existing UniFi Controller container
+      command: docker rm -f unifi-controller
+      ignore_errors: true
