@@ -1,8 +1,10 @@
 ---
 - hosts: sbc
+  vars:
+      ansible_become_password: "{{ sudo_pass }}"
   tasks:
     - name: Stop Docker container
       ansible.builtin.command:
-        cmd: docker stop unifi-controller
+        cmd: sudo docker stop unifi-controller
       async: 60
       poll: 10
