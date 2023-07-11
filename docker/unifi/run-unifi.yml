@@ -1,0 +1,16 @@
+---
+- host: sbc
+  become: yes
+  tasks:
+    - name: Run UniFi Controller Docker container
+      community.docker.docker_container:
+        name: unifi-controller
+        image: ryansch/unifi-rpi:latest
+        state: started
+        detach: yes
+        network_mode: host
+        env:
+          TZ: 'Europe/Stockholm'
+        volumes:
+          - /UniFi/data:/unifi
+          - /UniFi/log:/var/log/unifi
