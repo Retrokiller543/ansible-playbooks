@@ -13,8 +13,8 @@
       line: 'admin ALL=(ALL) NOPASSWD:ALL'
       validate: 'visudo -cf %s'
   - name: Add user to additional groups
-      user:
-        name: "{{ lookup('env', 'username')}}"
-        groups: "{{ lookup('env', 'groups')}}"
-        append: yes
+    ansible.builtin.user:
+      name: "{{ lookup('env', 'username')}}"
+      groups: "{{ lookup('env', 'groups')}}"
+      append: yes
 ...
