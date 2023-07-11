@@ -5,5 +5,7 @@
     ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: Run UniFi Controller Docker container
-      shell: docker run -d --name=unifi-controller --net=host -e TZ='Europe/Stockholm' -v /UniFi/data:/unifi -v /UniFi/log:/var/log/unifi ryansch/unifi-rpi:latest
+      shell: docker run -d --name=unifi -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -e MEM_LIMIT=1024 -e MEM_STARTUP=1024 -p 8443:8443 -v /UniFi/data:/config --restart unless-stopped lscr.io/linuxserver/unifi-controller:latest
+
+
 
