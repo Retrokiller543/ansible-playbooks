@@ -4,7 +4,9 @@
       ansible_become_password: "{{ sudo_pass }}"
   tasks:
     - name: Stop Docker container
-      ansible.builtin.command:
-        cmd: sudo docker stop unifi-controller
+      expect:
+        command: sudo docker stop unifi-controller
+        responses:
+          Password: "{{ sudo_pass }}"
       async: 60
       poll: 10
